@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        .jumbotron {
+            width: 450px;
+            text-align: center;
+            margin: 10px auto;
+        }
+        .table {
+            margin-top: 15px;
+        }
+        .form-control {
+            margin-bottom: 5px;
+        }
+        .btn {
+            margin-top: 15px;
+            border-radius: 2px;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div ng-controller="listaTelefonicaCtrl" class="jumbotron">
+    <table class="table table-striped">
+        <h3>{{ app }}</h3>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="contato in contatos">
+                <td>{{ contato.nome }}</td>
+                <td>{{ contato.telefone }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <input class="form-control" type="text" ng-model="contato.nome" placeholder="Nome">
+    <input class="form-control" type="number" ng-model="contato.telefone" placeholder="Telefone">
+    <button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)">Adicionar Contato</button>
+    {{ contato }}
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    var app = angular.module('myApp', []);
+
+    app.controller('listaTelefonicaCtrl', function($scope) {
+        $scope.app = "Lista Telefônica"
+
+        $scope.contatos = [
+        {nome: "Rodrigo", telefone: "999999999"},
+        {nome: "Ana", telefone: "555555555"},
+        {nome: "Kelly", telefone: "45464134"}
+        ]
+
+        $scope.adicionarContato = function(contato) {
+            $scope.contatos.push(contato);
+            delete $scope.contato;
+        }
+    });
+</script>
+</body>
+</html>
